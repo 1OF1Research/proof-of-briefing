@@ -1,0 +1,11 @@
+PROOF OF BRIEFING — CLAIM SNAPSHOT. What an official said, captured and anchored.
+Incident: 2026-11-13 FAA nationwide ground stop. Question: what caused the failure behind the ground stop.
+Source record: FAA Command Center advisory, 2026-11-13 (the day's official statement, as published in contemporaneous reporting). No speaker is claimed — this snapshot records an absence.
+Stated: 2026-11-13T20:54:00Z. Retrieved by us: 2026-11-14T19:17:00Z. Anchoring on NEAR testnet: see the proof record served with this snapshot.
+
+Basis: Scoped to the official statement captured for that day: the FAA advisory announces the stop and states no cause, and no official determination appears in the day's captured record. A preliminary view circulated in contemporaneous reporting (aging telecommunications routers, overloaded with data) was never issued as an official determination in that record, so the state is none-stated — not unknown, and not a candidate.
+
+Not yet known: no official cause has been stated. In the captured record of 2026-11-13, the statement announcing the event gives no cause, and no determination appears. Absence of a stated cause is not evidence for any cause.
+
+Evidence: FAA nationwide ground stop advisory, 2026-11-13 (text as published in contemporaneous reporting), 685 bytes, sha256 909a9e092a329d03…, retrieved 2026-11-14T19:17:00Z ; Documented record of November 13, 2026 (house notes from Reuters and contemporaneous reporting, sources cited in the file), 2621 bytes, sha256 fb4adef5e0c30cf8…, retrieved 2026-11-14T19:17:00Z
+Research prototype and information aid only. Not an operational aviation system. A hash proves committed bytes are unchanged — never that the statement was true, complete, or final.

@@ -152,7 +152,7 @@ export async function readSources() {
 
 // --- The brief: deterministic plain language, built only from the data ---
 
-export function renderBrief(snap, changes) {
+export function renderBrief(snap, changes, notYetKnown) {
   const L = [];
   const obs = snap.observed;
   L.push("PROOF OF BRIEFING — United States airspace, from official public sources.");
@@ -197,6 +197,14 @@ export function renderBrief(snap, changes) {
     L.push("");
   }
 
+  // Optional, claim-derived: what officials have NOT yet determined,
+  // rendered from an anchored claim snapshot (app/claims.mjs). Absent
+  // unless a claim is supplied, so existing briefs are byte-identical.
+  if (notYetKnown) {
+    L.push(notYetKnown);
+    L.push("");
+  }
+
   L.push("Watchlist airport conditions (latest official weather observation):");
   for (const code of Object.keys(obs.airports).sort()) {
     const a = obs.airports[code];
@@ -224,6 +232,6 @@ export function assembleSnapshot(reading, changes) {
     observed: reading.observed,
     interpretation: { brief: "" },
   };
-  snap.interpretation.brief = renderBrief(snap, changes);
+  snap.interpretation.brief = renderBrief(snap, changes, reading.not_yet_known);
   return snap;
 }

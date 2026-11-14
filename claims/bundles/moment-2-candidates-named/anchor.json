@@ -1,0 +1,16 @@
+{
+  "schema": "anchor/1",
+  "method": "contract",
+  "network": "testnet",
+  "contract": "agentembassy.testnet",
+  "publisher": "agentembassy.testnet",
+  "snapshot_id": "233a4d8eeaeaeafcecfea71a103bca83569434a3992a1e5da47fc7b4340dc711",
+  "source": "Claim \u2014 Duffy statement via Fox News, 2026-11-14 (proof-of-briefing-claim/1)",
+  "observed_at": "2026-11-14T16:19:44Z",
+  "index": 4,
+  "block_height": 277699443,
+  "anchored_at": "2026-11-14T19:22:07Z",
+  "tx_hash": "2PbQVJf4XEpQKTXf4ocDQFWuEGL3NNoSRytLuRv9gWgy",
+  "explorer_url": "https://testnet.nearblocks.io/address/agentembassy.testnet",
+  "tx_url": "https://testnet.nearblocks.io/txns/2PbQVJf4XEpQKTXf4ocDQFWuEGL3NNoSRytLuRv9gWgy"
+}

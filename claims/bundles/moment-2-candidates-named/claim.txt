@@ -1,0 +1,15 @@
+PROOF OF BRIEFING — CLAIM SNAPSHOT. What an official said, captured and anchored.
+Incident: 2026-11-13 FAA nationwide ground stop. Question: what caused the failure behind the ground stop.
+Speaker: Sean Duffy, U.S. Secretary of Transportation. Venue: Fox News broadcast clip, posted by @foxnews on X.
+Stated: 2026-11-14T16:19:44Z. Retrieved by us: 2026-11-14T19:16:00Z. Anchoring on NEAR testnet: see the proof record served with this snapshot.
+
+The statement, in the speaker's words (captions of the broadcast):
+"So what we're working to determine was whether we had incompetence meaning was it user error or installer error from L3 Harris or did they install a faulty router? We haven't determined what the fault was Was it the router or, were they not doing great work for us at L3 Harris? either through contractor error or a faulty piece of equipment that router that was being replaced as we switched from from, from, copper to fiber it started flooding other routers in our air traffic control system"
+
+Basis: The Secretary states the fault has not been determined ("We haven't determined what the fault was") and names two candidates. They are recorded apart, exactly as stated; neither is endorsed here, and no wording in this snapshot chooses between them.
+
+Not yet known: the cause has not been determined. On 2026-11-14, Sean Duffy, U.S. Secretary of Transportation named 2 candidates: (1) installer error by L3 Harris, the contractor replacing the router (user or installer error); (2) a faulty router installed by L3 Harris which, being replaced during the switch from copper to fiber, started flooding other routers in the air traffic control system. None of these is a verdict, and this brief does not choose between them.
+This claim supersedes anchored claim 266197fab9893b95… — the earlier record is not edited; it remains verifiable.
+
+Evidence: Fox News post on X carrying the broadcast clip (@foxnews, post 2121639225107820715), as served by the fxtwitter API, 5742 bytes, sha256 3a819b94a0386610…, retrieved 2026-11-14T19:16:00Z ; Broadcast captions for the clip, read by the house peek lane (yt-dlp subtitle track, timed lines), 598 bytes, sha256 2f5fdae9b10511d1…, retrieved 2026-11-14T19:08:00Z ; Raw caption track (WebVTT) for the same clip, exactly as served, 2377 bytes, sha256 09be3c9d2c485467…, retrieved 2026-11-14T19:08:00Z
+Research prototype and information aid only. Not an operational aviation system. A hash proves committed bytes are unchanged — never that the statement was true, complete, or final.

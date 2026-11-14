@@ -135,10 +135,70 @@ cd .. && python3 redteam.py demo-bundle /tmp/redteam
 | 0 | `d4bbc383…` | Live snapshot, retrieved 2026-11-14T18:08:52Z | `4jcJhw3xzB7jUyRzjzWdouBvTC1oa9toQi6dUUw7iCYs` |
 | 1 | `5f874f2d…` | Replay moment 1 — stop in effect | `8cfnx1X1q5RHfupE28kxzcszaF52Gino8nSw6i3oGSmw` |
 | 2 | `c1bd5c9d…` | Replay moment 3 — stop lifted | `ELABwKpgBFVFpvp3XUw9fw8bjwa9JrS5nGik7MtNB84P` |
+| 3 | `266197fa…` | Claim moment 1 — no cause stated (2026-11-13) | `43maWbRHQHiz8RuRTaUeWZBgoxs8AnD1UyQqAw1YVt1y` |
+| 4 | `233a4d8e…` | Claim moment 2 — two candidates named (2026-11-14) | `2PbQVJf4XEpQKTXf4ocDQFWuEGL3NNoSRytLuRv9gWgy` |
 
 Contract deployment: tx `2saappjxxNiUG6wq2RM3KdJSNbRdnrSX67gjaTJrBiHR`
 (wasm SHA-256 `63b42ab2b975fa37c5afdcf33ddf4e5318aea7c230f19ca102374d632ca125cc`).
 Explorer: https://testnet.nearblocks.io/address/agentembassy.testnet
+
+## The claim timeline (post-filing addition, November 14, 2026)
+
+The records above prove what official sources *showed*. But a public
+picture has a second half: what officials *said* about it — and that
+record is just as easy to rewrite after the fact. Two days after the
+ground stop, the cause was still two competing claims and no verdict.
+Nothing stopped a later "we always knew" from quietly replacing the
+earlier, honest uncertainty. So the filed starting point grew the
+other half:
+
+A **claim snapshot** (`claims/`, schema `proof-of-briefing-claim/1`)
+captures an official statement the same way a condition snapshot
+captures a feed: the source bytes held as evidence, the retrieval
+time, the canonical digest, the anchor on NEAR testnet through the
+same publish path. It carries the speaker, the venue, the statement
+time, and a **certainty state** — `none-stated`, `unknown`,
+`candidates-named`, or `verdict` — and the candidate set and the
+certainty state live *inside* the digest. Competing candidates are
+held apart: they never merge, nothing here picks one, and a verdict
+may only arrive as a *new* anchored claim that references the claim
+it supersedes. The plain-language brief gains a line rendered from
+claim state: what officials have **not yet determined**, stated as
+plainly as what they have.
+
+The November 13 timeline, in `claims/bundles/`:
+
+- **Moment 1 — no cause stated** (record 3). The FAA advisory of
+  2026-11-13 announces the stop and states no cause. An absence,
+  recorded honestly: a preliminary view in contemporaneous reporting
+  was never an official determination, and the snapshot's basis says
+  exactly that.
+- **Moment 2 — candidates named** (record 4; supersedes moment 1).
+  Secretary Duffy, on Fox News (2026-11-14): the fault "hasn't been
+  determined." Two candidates, held apart: installer error by the
+  contractor L3 Harris, or a faulty router that flooded other routers
+  during the copper-to-fiber replacement. The captured evidence is
+  the spoken record itself — the post's bytes, the broadcast
+  captions, the raw caption track — and every statement line in the
+  snapshot traces verbatim to the captions.
+- **Moment 3 — verdict: pending.** No snapshot exists and none is
+  fabricated; a marker file holds the slot open. When a determination
+  is issued, it enters as a new anchored claim superseding moment 2,
+  and the days of not knowing stay provable.
+
+`verify.py` verifies claim bundles standalone, with the same
+fail-closed discipline: a tampered or dropped candidate, a swapped
+speaker, an in-place certainty upgrade, a backdated claim, or a
+verdict fabricated for the pending slot all fail. The claim battery
+(`redteam-claims.py`) attacks exactly those rewrites.
+
+```sh
+# 7. Verify the claim timeline.
+python3 verify.py claims/bundles/moment-1-no-cause-stated   # record 3
+python3 verify.py claims/bundles/moment-2-candidates-named  # record 4
+cd claims && node replay-claims.mjs ./bundles   # rebuilds the anchored ids exactly
+cd .. && python3 redteam-claims.py claims/bundles/moment-2-candidates-named /tmp/redteam-claims
+```
 
 ## What is baseline, what is new
 

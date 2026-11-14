@@ -1,0 +1,16 @@
+{
+  "schema": "anchor/1",
+  "method": "contract",
+  "network": "testnet",
+  "contract": "agentembassy.testnet",
+  "publisher": "agentembassy.testnet",
+  "snapshot_id": "266197fab9893b95252df207d0ae9552f08a739404ca0406a6d682178accf1c3",
+  "source": "Claim \u2014 2026-11-13 record: no cause stated (proof-of-briefing-claim/1)",
+  "observed_at": "2026-11-13T20:54:00Z",
+  "index": 3,
+  "block_height": 277699382,
+  "anchored_at": "2026-11-14T19:21:30Z",
+  "tx_hash": "43maWbRHQHiz8RuRTaUeWZBgoxs8AnD1UyQqAw1YVt1y",
+  "explorer_url": "https://testnet.nearblocks.io/address/agentembassy.testnet",
+  "tx_url": "https://testnet.nearblocks.io/txns/43maWbRHQHiz8RuRTaUeWZBgoxs8AnD1UyQqAw1YVt1y"
+}

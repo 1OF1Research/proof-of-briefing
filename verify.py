@@ -24,6 +24,17 @@ The verifier trusts nothing in the bundle. It checks:
   5. Freshness is reported honestly (informational; staleness is a
      label, not a failure of integrity).
 
+A CLAIM bundle (claim.json instead of snapshot.json) proves what an
+official SAID: the statement's words trace verbatim to the captured
+caption evidence; the statement time traces to the captured post
+record; the certainty state and the candidate set sit inside the
+digest, so a tampered candidate, a dropped candidate, a swapped
+speaker, an in-place certainty upgrade, or a backdated claim all fail;
+and a claim that supersedes another must point at a digest that is
+itself anchored on the chain. The verdict slot of a timeline is a
+pending marker, never a bundle — a fabricated verdict has no anchor
+and fails.
+
 Exit 0 and "RESULT: PASS" only if every integrity check passes. Alter
 one byte anywhere — the briefing, a timestamp, a captured feed — and
 verification fails. A hash proves committed bytes are unchanged; it
@@ -90,6 +101,154 @@ def view_call(rpc_url, contract, method_name, args_obj):
     return json.loads(bytes(res["result"]).decode())
 
 
+def parse_iso(s):
+    import calendar
+    import datetime
+
+    return calendar.timegm(datetime.datetime.strptime(s, "%Y-%m-%dT%H:%M:%SZ").timetuple())
+
+
+CERTAINTY_STATES = ["none-stated", "unknown", "candidates-named", "verdict"]
+
+
+def verify_claim(bundle, rpc_url):
+    claim_path = bundle / "claim.json"
+    anchor_path = bundle / "anchor.json"
+    if not claim_path.exists():
+        print("RESULT: FAIL — claim bundle is missing claim.json")
+        return 1
+    if not anchor_path.exists():
+        print("RESULT: FAIL — claim bundle has no anchor record (unanchored claims are never verified; a fabricated verdict fails here)")
+        return 1
+
+    claim_bytes = claim_path.read_bytes()
+    claim = json.loads(claim_bytes.decode("utf-8"))
+    anchor = json.loads(anchor_path.read_text())
+
+    check("claim schema is proof-of-briefing-claim/1", claim.get("schema") == "proof-of-briefing-claim/1",
+          str(claim.get("schema")))
+
+    # 1. Canonical digest — the certainty state, the candidate set, the
+    # speaker, and the statement lines are all inside it.
+    digest = hashlib.sha256(canonical(claim)).hexdigest()
+    check("claim canonical digest recomputes", digest == anchor.get("snapshot_id"),
+          f"sha256 {digest[:16]}… vs anchor {str(anchor.get('snapshot_id'))[:16]}…")
+    check("served claim bytes are the canonical bytes", claim_bytes == canonical(claim))
+    check("observed_at is the statement time (anchor field discipline)",
+          claim.get("observed_at") == claim.get("stated_at"), str(claim.get("stated_at")))
+
+    # 2. Evidence files match the manifest.
+    for entry in claim.get("evidence", []):
+        f = bundle / "evidence" / entry["file"]
+        if not f.exists():
+            check(f"evidence present: {entry['file']}", False, "file missing")
+            continue
+        raw = f.read_bytes()
+        ok = len(raw) == entry["bytes"] and hashlib.sha256(raw).hexdigest() == entry["sha256"]
+        check(f"evidence intact: {entry['file']}", ok, f"{len(raw)} bytes, sha256 {hashlib.sha256(raw).hexdigest()[:16]}…")
+
+    # 3. The statement's words trace verbatim to the captured captions:
+    # every claimed line is one of the transcript's lines.
+    lines = claim.get("statement_lines", [])
+    transcript_files = [e for e in claim.get("evidence", []) if "transcript" in e["file"]]
+    if lines:
+        if not transcript_files:
+            check("statement lines trace to captured captions", False, "no transcript evidence in bundle")
+        else:
+            import re
+
+            captured = set()
+            for e in transcript_files:
+                f = bundle / "evidence" / e["file"]
+                if f.exists():
+                    for raw_line in f.read_text(encoding="utf-8", errors="replace").split("\n"):
+                        captured.add(re.sub(r"^\[\d{2}:\d{2}\]\s*", "", raw_line))
+            missing = [l for l in lines if l not in captured]
+            check("every statement line traces verbatim to the captured captions", not missing,
+                  "untraced: " + "; ".join(missing) if missing else f"all {len(lines)} lines traced")
+
+    # 4. The statement time traces to the captured post record.
+    post_file = bundle / "evidence" / "x-post.json"
+    if post_file.exists():
+        try:
+            post = json.loads(post_file.read_text())
+            ts = post["tweet"]["created_timestamp"]
+            import datetime
+
+            post_iso = datetime.datetime.fromtimestamp(ts, tz=datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+            check("statement time traces to the captured post record", post_iso == claim.get("stated_at"),
+                  f"post {post_iso} vs claim {claim.get('stated_at')}")
+        except Exception as e:
+            check("statement time traces to the captured post record", False, f"post record unreadable: {e}")
+
+    # 5. Time order: a statement cannot be retrieved before it was made,
+    # nor anchored before it was retrieved. A backdated claim fails here
+    # even before the digest is consulted.
+    try:
+        t_stated = parse_iso(claim["stated_at"])
+        t_retrieved = parse_iso(claim["retrieved_at"])
+        t_anchored = parse_iso(anchor["anchored_at"])
+        check("time order holds (stated <= retrieved <= anchored)",
+              t_stated <= t_retrieved <= t_anchored,
+              f"stated {claim['stated_at']}, retrieved {claim['retrieved_at']}, anchored {anchor['anchored_at']}")
+    except Exception as e:
+        check("time order holds (stated <= retrieved <= anchored)", False, f"unparseable time: {e}")
+
+    # 6. Certainty discipline.
+    cert = claim.get("certainty")
+    candidates = claim.get("candidates", [])
+    brief = claim.get("interpretation", {}).get("brief", "")
+    check("certainty state is a known state", cert in CERTAINTY_STATES, str(cert))
+    if cert == "candidates-named":
+        check("candidates-named holds at least two candidates apart", len(candidates) >= 2,
+              f"{len(candidates)} candidates")
+        absent = [c for c in candidates if c not in brief]
+        check("every candidate appears verbatim in the claim brief", not absent,
+              "absent: " + "; ".join(absent) if absent else "all candidates carried")
+        check("brief carries the not-yet-known line", "Not yet known:" in brief)
+    elif cert == "none-stated":
+        check("none-stated carries no candidates and no statement lines",
+              candidates == [] and lines == [], "an absence record invents nothing")
+        check("brief carries the not-yet-known line", "Not yet known:" in brief)
+    elif cert == "unknown":
+        check("brief carries the not-yet-known line", "Not yet known:" in brief)
+    elif cert == "verdict":
+        check("a verdict references the claim it supersedes", bool(claim.get("supersedes")),
+              str(claim.get("supersedes"))[:16] + "…" if claim.get("supersedes") else "missing")
+
+    # 7–8. The chain's own records, read live: the record at the claimed
+    # index carries this claim, and whatever this claim supersedes is
+    # itself anchored — an upgrade floating free of the chain fails.
+    contract = anchor.get("contract")
+    try:
+        idx = anchor.get("index")
+        if idx is None:
+            check("NEAR anchor record exists", False, "anchor record claims no index")
+        else:
+            rec = view_call(rpc_url, contract, "get", {"index": idx})
+            ok = rec is not None and rec[2] == digest and rec[1] == claim["stated_at"]
+            check("NEAR anchor record at the claimed index carries this claim",
+                  ok, f"index {idx}, chain sha256 {str(rec[2])[:16] if rec else 'none'}…")
+        if claim.get("supersedes"):
+            count = view_call(rpc_url, contract, "count", {})
+            found = False
+            for i in range(count):
+                r = view_call(rpc_url, contract, "get", {"index": i})
+                if r is not None and r[2] == claim["supersedes"]:
+                    found = True
+                    break
+            check("the superseded claim is itself anchored on the chain", found,
+                  f"supersedes {str(claim['supersedes'])[:16]}…, scanned {count} records")
+    except Exception as e:
+        check("NEAR anchor record exists", False, f"chain read failed: {e}")
+
+    if FAILURES:
+        print(f"RESULT: FAIL — {len(FAILURES)} check(s) failed: {', '.join(FAILURES)}")
+        return 1
+    print("RESULT: PASS — the claim bundle is the anchored claim, byte for byte")
+    return 0
+
+
 def main():
     if len(sys.argv) < 2:
         print("usage: verify.py BUNDLE_DIR [--rpc URL]")
@@ -98,6 +257,9 @@ def main():
     rpc_url = RPC_DEFAULT
     if "--rpc" in sys.argv:
         rpc_url = sys.argv[sys.argv.index("--rpc") + 1]
+
+    if (bundle / "claim.json").exists():
+        return verify_claim(bundle, rpc_url)
 
     snap_path = bundle / "snapshot.json"
     anchor_path = bundle / "anchor.json"

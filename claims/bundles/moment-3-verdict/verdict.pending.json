@@ -1,0 +1,9 @@
+{
+  "state": "pending",
+  "schema": "proof-of-briefing-claim-pending/1",
+  "incident": "2026-11-13 FAA nationwide ground stop",
+  "question": "what caused the failure behind the ground stop",
+  "as_of": "2026-11-14T19:17:00Z",
+  "awaiting": "an official determination of the cause",
+  "rule": "A verdict may enter only as a new anchored claim snapshot with certainty \"verdict\" whose supersedes references the candidates-named claim. This marker is not a snapshot, carries no digest, and is never anchored."
+}

@@ -1,0 +1,13 @@
+[00:00] So what we're working to determine was whether we had incompetence
+[00:06] meaning was it user error or installer error from L3 Harris
+[00:11] or did they install a faulty router?
+[00:14] We haven't determined what the fault was
+[00:16] Was it the router
+[00:17] or, were they not
+[00:20] doing great work for us at L3 Harris?
+[00:23] either through contractor error or a faulty
+[00:26] piece of equipment
+[00:27] that router that was being replaced as we switched from
+[00:30] from, from, copper to fiber
+[00:33] it started flooding
+[00:34] other routers in our air traffic control system
