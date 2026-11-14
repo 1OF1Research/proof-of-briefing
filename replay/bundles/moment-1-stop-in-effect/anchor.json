@@ -1,0 +1,16 @@
+{
+  "schema": "anchor/1",
+  "method": "contract",
+  "network": "testnet",
+  "contract": "agentembassy.testnet",
+  "publisher": "agentembassy.testnet",
+  "snapshot_id": "5f874f2da88bf0a42323e40b27d9ff133e2c196b86380a6f29c5e214c23fafbe",
+  "source": "REPLAY of 2026-11-13 \u2014 FAA advisory + documented record (proof-of-briefing/1-replay)",
+  "observed_at": "2026-11-13T21:05:00Z",
+  "index": 1,
+  "block_height": 277692574,
+  "anchored_at": "2026-11-14T18:14:40Z",
+  "tx_hash": "8cfnx1X1q5RHfupE28kxzcszaF52Gino8nSw6i3oGSmw",
+  "explorer_url": "https://testnet.nearblocks.io/address/agentembassy.testnet",
+  "tx_url": "https://testnet.nearblocks.io/txns/8cfnx1X1q5RHfupE28kxzcszaF52Gino8nSw6i3oGSmw"
+}

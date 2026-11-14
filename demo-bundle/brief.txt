@@ -1,0 +1,35 @@
+PROOF OF BRIEFING — United States airspace, from official public sources.
+Source publication: FAA feed updated Sat Nov 14 18:08:13 2026 GMT.
+Our retrieval: 2026-11-14T18:08:52Z. Anchoring on NEAR testnet: see the proof record served with this brief.
+
+Headline: 1 under Airport Closures; 3 under Airport Closures.
+
+Active items, as the FAA feed states them:
+- Airport Closures — SUA; reason: !MIA 11/159 SUA AD AP CLSD EXC AIRSHOW ACFT 2611141600-2611142230; from Nov 14 at 16:00 UTC.; reopens Nov 14 at 22:30 UTC..
+- Airport Closures — LAX; reason: !LAX 05/277 LAX AD AP CLSD TO NON SKED TRANSIENT GA ACFT EXC 24HR PPR CTC ATLANTIC AVIATION 310-258-9884 OR SIGNATURE AVIATION 310-410-9605 2605271826-2705281600; from May 27 at 18:26 UTC.; reopens May 28 at 16:00 UTC..
+- Airport Closures — SAN; reason: !SAN 10/004 SAN AD AP CLSD TO NON SKED TRANSIENT GA ACFT EXC PPR 619-298-7704 2610011633-2701010800; from Oct 01 at 16:33 UTC.; reopens Jan 01 at 08:00 UTC..
+- Airport Closures — LAS; reason: !LAS 10/160 LAS AD AP CLSD TO NON SKED TRANSIENT GA ACFT EXC 24HR PPR 702-261-7775 2610281926-2701272300; from Oct 28 at 19:26 UTC.; reopens Jan 27 at 23:00 UTC..
+
+What changed since the previous snapshot:
+- FAA feed update time advanced: Sat Nov 14 18:04:46 2026 GMT -> Sat Nov 14 18:08:13 2026 GMT
+
+Watchlist airport conditions (latest official weather observation):
+- ATL: VFR, 11.7 C, wind 310 deg at 9 kt, visibility 10+ — observed 2026-11-14T17:52:00Z.
+- BOS: VFR, 6.7 C, wind 270 deg at 7 kt, visibility 10+ — observed 2026-11-14T17:54:00Z.
+- DEN: VFR, 6.7 C, wind VRB deg at 4 kt, visibility 10+ — observed 2026-11-14T17:53:00Z.
+- DFW: VFR, 14.4 C, wind 120 deg at 12 kt, visibility 10+ — observed 2026-11-14T17:53:00Z.
+- DTW: MVFR, 4.4 C, wind 320 deg at 10 kt, visibility 10+ — observed 2026-11-14T17:53:00Z.
+- EWR: VFR, 7.2 C, wind 270 deg at 11 kt, visibility 10+ — observed 2026-11-14T17:51:00Z.
+- IAH: VFR, 17.8 C, wind 100 deg at 10 kt, visibility 10+ — observed 2026-11-14T17:53:00Z.
+- JFK: VFR, 7.2 C, wind 320 deg at 18 kt, visibility 10+ — observed 2026-11-14T17:51:00Z.
+- LAX: VFR, 19.4 C, wind 130 deg at 4 kt, visibility 10+ — observed 2026-11-14T17:53:00Z.
+- LGA: VFR, 7.2 C, wind 310 deg at 14 kt, visibility 10+ — observed 2026-11-14T17:51:00Z.
+- MIA: VFR, 20 C, wind 310 deg at 11 kt, visibility 10+ — observed 2026-11-14T17:53:00Z.
+- MSP: VFR, 3.9 C, wind calm, visibility 10+ — observed 2026-11-14T17:53:00Z.
+- ORD: VFR, 7.8 C, wind 340 deg at 11 kt, visibility 10+ — observed 2026-11-14T17:51:00Z.
+- PHX: VFR, 19.4 C, wind 170 deg at 9 kt, visibility 10+ — observed 2026-11-14T17:51:00Z.
+- SEA: VFR, 11.7 C, wind 150 deg at 6 kt, visibility 10+ — observed 2026-11-14T17:53:00Z.
+- SFO: VFR, 15.6 C, wind 120 deg at 9 kt, visibility 10+ — observed 2026-11-14T17:56:00Z.
+
+Evidence: FAA NAS Status, 1296 bytes, sha256 5578e7ddf4d4ed43…, retrieved 2026-11-14T18:08:52Z ; NOAA Aviation Weather Center METAR, 9086 bytes, sha256 caa87e8dadc4672b…, retrieved 2026-11-14T18:08:52Z
+Research prototype and information aid only. Not an operational aviation system. It issues no clearances, instructions, safety determinations, or recommendations. Official FAA systems remain authoritative.

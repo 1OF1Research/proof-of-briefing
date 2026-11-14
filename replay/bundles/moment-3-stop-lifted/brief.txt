@@ -1,0 +1,32 @@
+REPLAY — a reconstruction from the documented record of November 13, 2026, not a live capture.
+
+PROOF OF BRIEFING — United States airspace, from official public sources.
+Source publication: FAA feed updated time not stated.
+Our retrieval: 2026-11-14T01:20:00Z. Anchoring on NEAR testnet: see the proof record served with this brief.
+Note: feed stability could not be confirmed with a second read.
+
+Headline: the current FAA feed lists no ground stops, no ground delay programs, and no airport closures. That is a statement about the feed, not a promise about the sky.
+
+What changed since the previous snapshot:
+- ENDED (no longer listed in the feed) Ground Stop — ALL
+
+Watchlist airport conditions (latest official weather observation):
+- ATL: no current observation was read. Absence of an observation is not evidence of good conditions.
+- BOS: no current observation was read. Absence of an observation is not evidence of good conditions.
+- DEN: no current observation was read. Absence of an observation is not evidence of good conditions.
+- DFW: no current observation was read. Absence of an observation is not evidence of good conditions.
+- DTW: no current observation was read. Absence of an observation is not evidence of good conditions.
+- EWR: no current observation was read. Absence of an observation is not evidence of good conditions.
+- IAH: no current observation was read. Absence of an observation is not evidence of good conditions.
+- JFK: no current observation was read. Absence of an observation is not evidence of good conditions.
+- LAX: no current observation was read. Absence of an observation is not evidence of good conditions.
+- LGA: no current observation was read. Absence of an observation is not evidence of good conditions.
+- MIA: no current observation was read. Absence of an observation is not evidence of good conditions.
+- MSP: no current observation was read. Absence of an observation is not evidence of good conditions.
+- ORD: no current observation was read. Absence of an observation is not evidence of good conditions.
+- PHX: no current observation was read. Absence of an observation is not evidence of good conditions.
+- SEA: no current observation was read. Absence of an observation is not evidence of good conditions.
+- SFO: no current observation was read. Absence of an observation is not evidence of good conditions.
+
+Evidence: FAA nationwide ground stop advisory, 2026-11-13 (text as published in contemporaneous reporting), 685 bytes, sha256 909a9e092a329d03…, retrieved 2026-11-14T01:20:00Z ; Documented record of November 13, 2026 (house notes from Reuters and contemporaneous reporting, sources cited in the file), 2621 bytes, sha256 fb4adef5e0c30cf8…, retrieved 2026-11-14T01:20:00Z
+Research prototype and information aid only. Not an operational aviation system. It issues no clearances, instructions, safety determinations, or recommendations. Official FAA systems remain authoritative.

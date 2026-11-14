@@ -1,0 +1,16 @@
+{
+  "schema": "anchor/1",
+  "method": "contract",
+  "network": "testnet",
+  "contract": "agentembassy.testnet",
+  "publisher": "agentembassy.testnet",
+  "snapshot_id": "d4bbc383d70f9d0f2a54b9aa2c006ce82fe86fbb696ffa2cfcc40934bdd7fc01",
+  "source": "FAA NAS Status + NOAA Aviation Weather Center (proof-of-briefing/1)",
+  "observed_at": "2026-11-14T18:08:52Z",
+  "index": 0,
+  "block_height": 277692049,
+  "anchored_at": "2026-11-14T18:09:32Z",
+  "tx_hash": "4jcJhw3xzB7jUyRzjzWdouBvTC1oa9toQi6dUUw7iCYs",
+  "explorer_url": "https://testnet.nearblocks.io/address/agentembassy.testnet",
+  "tx_url": "https://testnet.nearblocks.io/txns/4jcJhw3xzB7jUyRzjzWdouBvTC1oa9toQi6dUUw7iCYs"
+}

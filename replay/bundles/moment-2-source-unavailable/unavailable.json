@@ -1,0 +1,5 @@
+{
+  "state": "unavailable",
+  "at": "2026-11-13T23:30:00Z",
+  "error": "REPLAY: during the outage window the official picture could not be read and confirmed. The system records the gap and refuses to describe the airspace; it never treats missing information as restrictions ended."
+}
